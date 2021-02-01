@@ -1,13 +1,20 @@
 import axios, { AxiosError } from "axios";
-
+import editJsonFile from "edit-json-file";
 import handler from "./../../../middleware/handler";
-
 import { Breed, BreedImage } from "./../../../interfaces/catapi";
+
+const file = editJsonFile(`${process.cwd()}/utils/counter.json`);
 
 const baseURL = "https://api.thecatapi.com/v1";
 
 handler.get(async (req, res, next) => {
   const breed = req.query.breed;
+  if (!Array.isArray(breed)) {
+    const oldValue: number = file.get(`${breed}`);
+    file.set(`${breed}`, oldValue + 1);
+    file.save();
+  }
+
   try {
     const info = await axios.get<Breed[]>(
       `${baseURL}/breeds/search?q=${breed}`,
