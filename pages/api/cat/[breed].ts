@@ -2,23 +2,31 @@ import axios, { AxiosError } from "axios";
 
 import handler from "./../../../middleware/handler";
 
-import { Breed } from "./../../../interfaces/catapi";
+import { Breed, BreedImage } from "./../../../interfaces/catapi";
 
 const baseURL = "https://api.thecatapi.com/v1";
 
 handler.get(async (req, res, next) => {
+  const breed = req.query.breed;
   try {
-    const resp = await axios.get<Breed[]>(
-      `${baseURL}/breeds/search?q=${req.query.query}`,
+    const info = await axios.get<Breed[]>(
+      `${baseURL}/breeds/search?q=${breed}`,
       {
         headers: { "x-api-key": process.env.CATAPI },
       }
     );
-    const cats = resp.data.map((cat) => {
-      return { name: cat.name, id: cat.id };
+    const images = await axios.get<BreedImage[]>(
+      `${baseURL}/images/search?breed_id=${breed}&limit=8`,
+      {
+        headers: { "x-api-key": process.env.CATAPI },
+      }
+    );
+
+    const refinedImages = images.data.map((image) => {
+      return { url: image.url };
     });
 
-    res.status(200).json(cats);
+    res.status(200).json({ info: info.data[0], images: refinedImages });
   } catch (error) {
     if (error.response) {
       const err: AxiosError = error;

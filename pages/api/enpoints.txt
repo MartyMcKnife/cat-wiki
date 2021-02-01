@@ -1,6 +1,6 @@
 GET /search - returns list of all cat breeds - DONE
 GET /searchs - returns top 10 searches
-Get /search/[value] - returns list of all matching cat breeds 
+Get /search/[value] - returns list of all matching cat breeds - DONE
 
-GET /cat/[breed] - gets info for specific breed 
+GET /cat/[breed] - gets info for specific breed - DONE
 

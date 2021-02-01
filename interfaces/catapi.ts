@@ -1,4 +1,24 @@
-export interface BreedsList {
+export interface Image {
+  height?: number;
+  id?: string;
+  url?: string;
+  width?: number;
+}
+
+export interface Weight {
+  imperial: string;
+  metric: string;
+}
+
+export interface BreedImage {
+  breeds: Breed[];
+  height: number;
+  id: string;
+  url: string;
+  width: number;
+}
+
+export interface Breed {
   adaptability: number;
   affection_level: number;
   alt_names?: string;
@@ -39,16 +59,4 @@ export interface BreedsList {
   wikipedia_url?: string;
   bidability?: number;
   cat_friendly?: number;
-}
-
-export interface Image {
-  height?: number;
-  id?: string;
-  url?: string;
-  width?: number;
-}
-
-export interface Weight {
-  imperial: string;
-  metric: string;
 }

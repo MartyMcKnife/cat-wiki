@@ -2,13 +2,13 @@ import axios, { AxiosError } from "axios";
 
 import handler from "./../../../middleware/handler";
 
-import { BreedsList } from "./../../../interfaces/catapi";
+import { Breed } from "./../../../interfaces/catapi";
 
 const baseURL = "https://api.thecatapi.com/v1";
 
 handler.get(async (req, res, next) => {
   try {
-    const resp = await axios.get<BreedsList[]>(`${baseURL}/breeds`, {
+    const resp = await axios.get<Breed[]>(`${baseURL}/breeds`, {
       headers: { "x-api-key": process.env.CATAPI },
     });
     const cats = resp.data.map((cat) => {
