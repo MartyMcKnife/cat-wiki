@@ -1,5 +1,5 @@
-import handler from "./../../middleware/handler";
-import counter from "./../../utils/counter.json";
+import handler from "../../middleware/handler";
+import counter from "../../utils/counter.json";
 
 function getKeysWithHighestValue(o: object, n: number) {
   var keys = Object.keys(o);
