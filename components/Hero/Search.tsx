@@ -12,24 +12,20 @@ interface Props {
 }
 
 const searchForItem = (query: string | undefined, object: getSearch[]) => {
-  console.log(query);
-
   if (query) {
     const regex = new RegExp(query, "gi");
     const newObj = object.filter((breed) => {
       return regex.test(breed.name);
     });
-    console.log(newObj);
     return newObj;
   } else {
-    console.log(object);
     return object;
   }
 };
 
 export default function Search({ cats }: Props): ReactElement {
   const [breedsList, setBreedsList] = useState(cats);
-  const [showBreed, setShowBreed] = useState(true);
+  const [showBreed, setShowBreed] = useState(false);
 
   const isDesktop = useMediaQuery({
     query: "(min-device-width: 640px)",
@@ -82,7 +78,7 @@ export default function Search({ cats }: Props): ReactElement {
 
       {showBreed && (
         <>
-          <div className="transition-all rounded-lg overflow-y-scroll mt-3 h-5/6 sm:h-52 absolute bg-white text-black w-full">
+          <div className="transition-all rounded-lg overflow-y-scroll mt-3 h-5/6 sm:h-52 absolute bg-white text-black w-full z-10">
             {breedItem.length > 0 ? breedItem : <NoBreeds />}
           </div>
         </>

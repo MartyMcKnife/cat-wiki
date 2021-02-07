@@ -16,6 +16,17 @@ module.exports = {
         100: "30rem",
         full: "100%",
       },
+      colors: {
+        text: "#291507",
+        main: "#E3E1DC",
+        highlight: "#DEC68B",
+      },
+      borderColor: {
+        accent: "#4D270C",
+      },
+      fontFamily: {
+        site: ["Montserrat", "sans-serif"],
+      },
     },
   },
   variants: {

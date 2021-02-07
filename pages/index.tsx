@@ -1,40 +1,45 @@
 import React, { ReactElement } from "react";
 import { GetStaticProps } from "next";
-import { getSearch } from "./../interfaces/api";
-import { Breed } from "./../interfaces/catapi";
-import axios from "axios";
+import { getSearch, IgetBreed } from "./../interfaces/api";
+
+import { getBreeds, getBreed } from "./../utils/apiHelpers";
 
 import Hero from "./../components/Hero/Hero";
+import SubHero from "./../components/Subhero/Subhero";
 
 interface Props {
   cats: getSearch[];
+  randomCatInfo: IgetBreed[];
 }
 
-export default function index({ cats }: Props): ReactElement {
+export default function index({ cats, randomCatInfo }: Props): ReactElement {
   return (
     <>
       <Hero cats={cats} />
-      <h1>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem blanditiis
-        illo dicta, sequi velit pariatur dolore corrupti voluptate eum modi fuga
-        suscipit asperiores! Eaque aspernatur tenetur eum sequi laborum enim.
-      </h1>
+      <SubHero cats={randomCatInfo} />
     </>
   );
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const baseURL = "https://api.thecatapi.com/v1";
+const getRandom = (array: Array<{ name: string; id: string }>, n: number) => {
+  return array.sort(() => Math.random() - Math.random()).slice(0, n);
+};
 
-  const resp = await axios.get<Breed[]>(`${baseURL}/breeds`, {
-    headers: { "x-api-key": process.env.CATAPI },
-  });
-  const cats = resp.data.map((cat) => {
-    return { name: cat.name, id: cat.id };
-  });
+export const getStaticProps: GetStaticProps = async (context) => {
+  const cats = await getBreeds();
+  const randomCats = getRandom(cats, 8);
+
+  const randomCatInfo = await Promise.all(
+    randomCats.map(async (cat) => {
+      const data = await getBreed(cat.name);
+      return data;
+    })
+  );
+
   return {
     props: {
       cats,
+      randomCatInfo,
     },
   };
 };
