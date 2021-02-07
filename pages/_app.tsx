@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import Image from "next/image";
+import App from "next/app";
 import Layout from "./../components/Layout";
 import Logo from "./../components/Logo";
 
@@ -16,5 +16,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     </div>
   );
 }
+MyApp.getInitialProps = async (appContext) => {
+  // calls page's `getInitialProps` and fills `appProps.pageProps`
+  const appProps = await App.getInitialProps(appContext);
 
+  return { ...appProps };
+};
 export default MyApp;

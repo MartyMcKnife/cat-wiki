@@ -12,10 +12,16 @@ module.exports = {
       height: (theme) => ({
         100: "30rem",
       }),
+      backgroundSize: {
+        100: "30rem",
+        full: "100%",
+      },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      display: ["group-focus", "group-hover"],
+    },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };

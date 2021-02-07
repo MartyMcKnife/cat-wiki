@@ -5,6 +5,7 @@ export default function Layout(): ReactElement {
   return (
     <div>
       <Head>
+        <title>Cat Wiki</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="CatwikiLogo.svg" />
