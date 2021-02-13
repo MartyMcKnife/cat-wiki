@@ -9,11 +9,11 @@ interface Props {
 export default function BreedName({ name, id }: Props): ReactElement {
   const router = useRouter();
   return (
-    <button
-      className="transition-colors text-left pl-4 py-3 font-semibold hover:bg-gray-200 block w-full focus:outline-none"
-      onClick={() => router.push("/api/searches")}
+    <a
+      className="transition-colors text-left pl-4 py-3 font-semibold hover:bg-gray-200 block w-full focus:outline-none cursor-pointer"
+      onMouseDown={() => router.push(`/cat/${name}`)}
     >
       {name}
-    </button>
+    </a>
   );
 }

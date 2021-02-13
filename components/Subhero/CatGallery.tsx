@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { IgetBreed } from "./../../interfaces/api";
+import CatGalleryImage from "./CatGalleryImage";
 
 interface Props {
   cats: IgetBreed[];
@@ -10,14 +11,11 @@ export default function CatGallery({ cats }: Props): ReactElement {
     const randomImage =
       cat.images[Math.floor(Math.random() * cat.images.length)];
     return (
-      <div className="cursor-pointer mx-2" key={cat.info.id}>
-        <img
-          src={randomImage.url}
-          alt={`A photo of a ${cat.info.name}`}
-          className="rounded-xl w-36 h-36 object-cover"
-        />
-        <h2 className="font-bold py-2 text-sm">{cat.info.name}</h2>
-      </div>
+      <CatGalleryImage
+        url={randomImage.url}
+        name={cat.info.name}
+        key={cat.info.id}
+      />
     );
   });
   return (

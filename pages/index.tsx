@@ -6,6 +6,7 @@ import { getBreeds, getBreed } from "./../utils/apiHelpers";
 
 import Hero from "./../components/Hero/Hero";
 import SubHero from "./../components/Subhero/Subhero";
+import Info from "./../components/Info/Info";
 
 interface Props {
   cats: getSearch[];
@@ -17,6 +18,7 @@ export default function index({ cats, randomCatInfo }: Props): ReactElement {
     <>
       <Hero cats={cats} />
       <SubHero cats={randomCatInfo} />
+      <Info />
     </>
   );
 }
@@ -27,7 +29,7 @@ const getRandom = (array: Array<{ name: string; id: string }>, n: number) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const cats = await getBreeds();
-  const randomCats = getRandom(cats, 8);
+  const randomCats = getRandom([...cats], 8);
 
   const randomCatInfo = await Promise.all(
     randomCats.map(async (cat) => {

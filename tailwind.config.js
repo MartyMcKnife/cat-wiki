@@ -31,7 +31,7 @@ module.exports = {
   },
   variants: {
     extend: {
-      display: ["group-focus", "group-hover"],
+      display: ["group-focus", "group-hover", "first"],
     },
   },
   plugins: [require("tailwind-scrollbar")],

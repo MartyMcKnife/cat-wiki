@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import Link from "next/link";
 
 import { IgetBreed } from "./../../interfaces/api";
 
@@ -20,9 +21,11 @@ export default function Subhero({ cats }: Props): ReactElement {
         <h1 className="text-xl md:text-5xl mr-4 md:w-4/12 my-4">
           66+ Breeds for you to discover
         </h1>
-        <button className=" mx-auto mr-4 font-bold focus:outline-none">
-          See More →{" "}
-        </button>
+        <Link href="/searches">
+          <a className=" mx-auto mr-4 font-bold focus:outline-none">
+            See More →
+          </a>
+        </Link>
       </div>
       <CatGallery cats={cats} />
     </div>

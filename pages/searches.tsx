@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
 
-export default function SearchedBreeds(): ReactElement {
+export default function searches(): ReactElement {
   return <div></div>;
 }
