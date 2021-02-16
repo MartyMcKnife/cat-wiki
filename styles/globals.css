@@ -20,4 +20,7 @@
     border-radius: 0.5rem;
     box-shadow: inset 7px 10px 12px #f0f0f0;
   }
+  #nprogress .bar {
+    background: "#291507";
+  }
 }

@@ -22,7 +22,7 @@ export const getBreed = async (breedID: string) => {
     }
   );
   const images = await axios.get<BreedImage[]>(
-    `${baseURL}/images/search?q=${breedID}&limit=8`,
+    `${baseURL}/images/search?q=${breedID}&limit=9&mime_types=png,jpg`,
     {
       headers: { "x-api-key": process.env.CATAPI },
     }

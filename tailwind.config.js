@@ -20,6 +20,7 @@ module.exports = {
         text: "#291507",
         main: "#E3E1DC",
         highlight: "#DEC68B",
+        cell: "#544439",
       },
       borderColor: {
         accent: "#4D270C",
