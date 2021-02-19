@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   if (context.params) {
     if (context.params.breed && !Array.isArray(context.params.breed)) {
       const breedName = context.params.breed;
-      const breedInfo = await getBreed(breedName);
+      const breedInfo = await getBreed(breedName, false);
       return {
         props: {
           breed: breedInfo,

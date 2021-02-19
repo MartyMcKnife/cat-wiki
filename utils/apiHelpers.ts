@@ -1,8 +1,9 @@
 import { Breed, BreedImage } from "../interfaces/catapi";
 import axios from "axios";
-import editJsonFile from "edit-json-file";
 
 const baseURL = "https://api.thecatapi.com/v1";
+
+export const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 export const getBreeds = async () => {
   const resp = await axios.get<Breed[]>(`${baseURL}/breeds`, {
@@ -14,13 +15,14 @@ export const getBreeds = async () => {
   return cats;
 };
 
-export const getBreed = async (breedID: string) => {
-  const info = await axios.get<Breed[]>(
-    `${baseURL}/breeds/search?q=${breedID}`,
-    {
-      headers: { "x-api-key": process.env.CATAPI },
-    }
-  );
+export const getBreed = async (breedID: string, id: boolean) => {
+  const infoPath = id
+    ? `${baseURL}/breeds/search?breed_id=${breedID}`
+    : `${baseURL}/breeds/search?q=${breedID}`;
+
+  const info = await axios.get<Breed[]>(infoPath, {
+    headers: { "x-api-key": process.env.CATAPI },
+  });
   const images = await axios.get<BreedImage[]>(
     `${baseURL}/images/search?q=${breedID}&limit=9&mime_types=png,jpg`,
     {
@@ -32,12 +34,4 @@ export const getBreed = async (breedID: string) => {
   });
 
   return { info: info.data[0], images: refinedImages };
-};
-
-export const addSearch = (breedID: string) => {
-  const file = editJsonFile(`${process.cwd()}/utils/counter.json`);
-
-  const oldValue: number = file.get(`${breedID}`);
-  file.set(`${breedID}`, oldValue + 1);
-  file.save();
 };

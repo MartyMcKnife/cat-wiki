@@ -16,9 +16,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Layout />
-      <div className="mx-6 md:mx-12 lg:mx-28 md:mt-10 font-site">
+      <div className="mx-6 md:mx-12 lg:mx-28 md:mt-10 font-site min-h-screen relative">
         <Header />
-        <Component {...pageProps} />
+        <div className="pb-28">
+          <Component {...pageProps} />
+        </div>
+
         <Footer />
       </div>
     </>

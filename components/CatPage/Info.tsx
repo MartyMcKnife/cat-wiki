@@ -1,12 +1,21 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import { Breed } from "./../../interfaces/catapi";
 import InfoBar from "./InfoBar";
+import { fetcher } from "./../../utils/apiHelpers";
+import useSWR from "swr";
 
 interface Props {
   breedInfo: Breed;
 }
 
 export default function Info({ breedInfo }: Props): ReactElement {
+  const { data, error } = useSWR(`/api/addSearch/${breedInfo.id}`, fetcher);
+  if (error) {
+    console.error(error);
+  }
+  if (data) {
+    console.log(data);
+  }
   return (
     <article className="text-text mt-4 sm:mt-0 sm:ml-20 xl:ml-28 max-w-screen-md text-left tracking-wide">
       <h1 className="text-4xl font-semibold">{breedInfo.name}</h1>
