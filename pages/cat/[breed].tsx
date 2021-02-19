@@ -3,21 +3,23 @@ import { getBreeds, getBreed } from "./../../utils/apiHelpers";
 import { IgetBreed } from "./../../interfaces/api";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Info from "./../../components/CatPage/Info";
+import Images from "./../../components/CatPage/Images";
 interface Props {
   breed: IgetBreed;
 }
 
 export default function Breed({ breed }: Props): ReactElement {
   return (
-    <section>
-      <div className="sm:flex md:mx-24 my-8">
+    <section className="xl:mx-24 my-8">
+      <div className="sm:flex">
         <img
           src={breed.images[0].url}
           alt={`Image of ${breed.info.name}`}
-          className="rounded-xl"
+          className="rounded-xl h-1/6"
         />
         <Info breedInfo={breed.info} />
       </div>
+      <Images images={breed.images} />
     </section>
   );
 }
