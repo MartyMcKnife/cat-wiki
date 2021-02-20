@@ -1,11 +1,15 @@
 import "../styles/globals.css";
 import "nprogress/nprogress.css";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
 import type { AppProps } from "next/app";
 import Layout from "./../components/Layout";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import Router from "next/router";
 import NProgress from "nprogress";
+
+config.autoAddCss = false;
 
 Router.events.on("routeChangeStart", (url) => {
   NProgress.start();
