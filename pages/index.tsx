@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const randomCatInfo = await Promise.all(
     randomCats.map(async (cat) => {
-      const data = await getBreed(cat.name, false);
+      const data = await getBreed(cat.id, true);
       return data;
     })
   );

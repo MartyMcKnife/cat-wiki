@@ -14,6 +14,7 @@ export default function CatGallery({ cats }: Props): ReactElement {
       <CatGalleryImage
         url={randomImage.url}
         name={cat.info.name}
+        id={cat.info.id}
         key={cat.info.id}
       />
     );

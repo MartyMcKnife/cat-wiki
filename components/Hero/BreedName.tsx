@@ -11,7 +11,7 @@ export default function BreedName({ name, id }: Props): ReactElement {
   return (
     <a
       className="transition-colors text-left pl-4 py-3 font-semibold hover:bg-gray-200 block w-full focus:outline-none cursor-pointer"
-      onMouseDown={() => router.push(`/cat/${name}`)}
+      onMouseDown={() => router.push(`/cat/${id}`)}
     >
       {name}
     </a>

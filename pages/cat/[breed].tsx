@@ -15,7 +15,7 @@ export default function Breed({ breed }: Props): ReactElement {
         <img
           src={breed.images[0].url}
           alt={`Image of ${breed.info.name}`}
-          className="rounded-xl h-1/6"
+          className="rounded-xl h-1/6 w-4/12"
         />
         <Info breedInfo={breed.info} />
       </div>
@@ -28,7 +28,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const breeds = await getBreeds();
 
   const paths = breeds.map((breed) => {
-    return { params: { breed: breed.name } };
+    return { params: { breed: breed.id } };
   });
 
   return {
@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   if (context.params) {
     if (context.params.breed && !Array.isArray(context.params.breed)) {
       const breedName = context.params.breed;
-      const breedInfo = await getBreed(breedName, false);
+      const breedInfo = await getBreed(breedName, true);
       return {
         props: {
           breed: breedInfo,

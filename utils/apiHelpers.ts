@@ -17,27 +17,20 @@ export const getBreeds = async () => {
 };
 
 export const getBreed = async (breedID: string, id: boolean) => {
-  const infoPath = id
-    ? `${baseURL}/breeds/search?breed_id=${breedID}`
-    : `${baseURL}/breeds/search?q=${breedID}`;
+  const imagePath = `${baseURL}/images/search?${
+    id ? "breed_ids" : "q"
+  }=${breedID}&limit=9&mime_types=png,jpg`;
 
-  const info = await axios.get<Breed[]>(infoPath, {
+  const images = await axios.get<BreedImage[]>(imagePath, {
     headers: { "x-api-key": process.env.CATAPI },
   });
-  const images = await axios.get<BreedImage[]>(
-    `${baseURL}/images/search?q=${breedID}&limit=9&mime_types=png,jpg`,
-    {
-      headers: { "x-api-key": process.env.CATAPI },
-    }
-  );
   const refinedImages = images.data.map((image) => {
     return { url: image.url };
   });
-
-  return { info: info.data[0], images: refinedImages };
+  return { info: images.data[0].breeds[0], images: refinedImages };
 };
 
-export const getSearched = () => {
+export const getSearched = (amount: number) => {
   function getKeysWithHighestValue(o: object, n: number) {
     var keys = Object.keys(o);
     keys.sort(function (a, b) {
@@ -45,5 +38,5 @@ export const getSearched = () => {
     });
     return keys.slice(0, n);
   }
-  return getKeysWithHighestValue(counter, 10);
+  return getKeysWithHighestValue(counter, amount);
 };
