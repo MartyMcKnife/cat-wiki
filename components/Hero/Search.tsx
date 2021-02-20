@@ -73,6 +73,7 @@ export default function Search({ cats }: Props): ReactElement {
           icon={faSearch}
           color="#291507"
           className="mx-auto mr-5"
+          size="1x"
         />
       </div>
 
