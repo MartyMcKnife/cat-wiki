@@ -1,4 +1,5 @@
 import { Breed, BreedImage } from "../interfaces/catapi";
+import counter from "./counter.json";
 import axios from "axios";
 
 const baseURL = "https://api.thecatapi.com/v1";
@@ -34,4 +35,15 @@ export const getBreed = async (breedID: string, id: boolean) => {
   });
 
   return { info: info.data[0], images: refinedImages };
+};
+
+export const getSearched = () => {
+  function getKeysWithHighestValue(o: object, n: number) {
+    var keys = Object.keys(o);
+    keys.sort(function (a, b) {
+      return o[b] - o[a];
+    });
+    return keys.slice(0, n);
+  }
+  return getKeysWithHighestValue(counter, 10);
 };
